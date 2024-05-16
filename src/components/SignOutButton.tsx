@@ -1,11 +1,17 @@
-"use client";
-import { signOut } from "next-auth/react";
-
+import { signOut } from "@/lib/auth";
 import React from "react";
-import { Button } from "./ui/button";
 
 const SignOutButton = () => {
-  return <Button onClick={() => signOut()}>Sign Out</Button>;
+  return (
+    <form
+      action={async () => {
+        "use server";
+        await signOut({ redirectTo: "/" });
+      }}
+    >
+      <button type="submit">Sign Out</button>
+    </form>
+  );
 };
 
 export default SignOutButton;
